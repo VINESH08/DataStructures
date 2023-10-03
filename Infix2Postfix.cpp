@@ -14,13 +14,13 @@ struct head
 class Infix2post
 {
 public:
-    string preexpr;
+    string inexpr;
     string postfixexpr;
     head *stackhead;
     // A+(B*C)
     Infix2post(string expr)
     {
-        preexpr = expr;
+        inexpr = expr;
     }
     void create()
     {
@@ -66,10 +66,10 @@ public:
     }
     void cnvtIn2post()
     {
-        for (int i = 0; preexpr[i] != '\0'; i++)
+        for (int i = 0; inexpr[i] != '\0'; i++)
 
         {
-            char character = preexpr[i];
+            char character = inexpr[i];
             if (character == '(')
             {
                 push('(');
