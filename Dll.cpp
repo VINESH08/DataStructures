@@ -50,8 +50,14 @@ public:
     {
         if (Search(val))
         {
-            ploc->prev->next = ploc->next;
-            ploc->next->prev = ploc->prev;
+            if (ploc->prev != NULL)
+                ploc->prev->next = ploc->next;
+            else
+                Dllhead->head = ploc->next;
+            if (ploc->next != NULL)
+                ploc->next->prev = ploc->prev;
+            else
+                Dllhead->rear = ploc->prev;
             (Dllhead->count)--;
             delete (ploc);
             return true;
@@ -87,7 +93,7 @@ int main()
     obj.Insert(2);
     obj.Insert(3);
     obj.Insert(4);
-    obj.Delete(3);
+    obj.Delete(4);
     if (obj.Search(6))
         cout << "Found" << endl;
     else

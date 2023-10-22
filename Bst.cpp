@@ -9,7 +9,7 @@ struct node
 class Bst
 {
 public:
-    node *currentnode;
+    node *parentnode;
     node *newnode;
     node *max, *min;
     node *create(int data)
@@ -20,7 +20,7 @@ public:
         newnode->rightchild = NULL;
         return newnode;
     }
-    node *addNode(node *root, int val)
+    node *addNode(node *&root, int val)
     {
         if (root == NULL)
         {
@@ -36,24 +36,107 @@ public:
         }
         return root;
     }
-    node *Search(node *root, int target)
+    void parentnodef(node *root, int target)
+    {
+        while (root != NULL && root->data != target)
+        {
+            parentnode = root;
+            if (root->data > target)
+                root = root->leftchild;
+            else if (target > root->data)
+                root = root->rightchild;
+        }
+    }
+    node *Delete(node *&root, int target)
     {
         if (root != NULL)
         {
-            if (target == root->data)
+            // node *searchnode = Search(root, target);
+            parentnodef(root, target);
+            node *searchnode = Search(root, target);
+            if (searchnode != NULL)
             {
-                currentnode = root;
+                if (searchnode->leftchild == NULL && searchnode->rightchild == NULL)
+                { // leafnode to be deleted...
+                    if (searchnode->data == root->data)
+                    {
+                        root = NULL;
+                        delete root;
+                        // root = NULL;
+                    }
+                    else if (searchnode->data < parentnode->data)
+                    {
+                        parentnode->leftchild = NULL;
+                        delete searchnode;
+                    }
+                    else if (searchnode->data > parentnode->data)
+                    {
+                        parentnode->rightchild = NULL;
+                        delete searchnode;
+                    }
+                    return root;
+                }
+                // node to be deleted has only right child/subtree.
+                else if (searchnode->leftchild == NULL)
+                {
+                    if (root->data == searchnode->data)
+                    {
+                        root = searchnode->rightchild;
+                        searchnode->rightchild = NULL;
+                        delete searchnode;
+                    }
+                    else if (searchnode->data < parentnode->data)
+                    {
+                        parentnode->leftchild = searchnode->rightchild;
+                        searchnode->rightchild = NULL;
+                        delete searchnode;
+                    }
+                    else if (searchnode->data > parentnode->data)
+                    {
+                        parentnode->rightchild = searchnode->rightchild;
+                        searchnode->rightchild = NULL;
+                        delete searchnode;
+                    }
+                    return root;
+                }
+                // node to be deleted has only left child/subtree.
+                else if (searchnode->rightchild == NULL)
+                {
+                    if (searchnode->data == root->data)
+                    {
+                        root = searchnode->leftchild;
+                        searchnode->leftchild = NULL;
+                        delete searchnode;
+                    }
+                    else if (searchnode->data > parentnode->data)
+                    {
+                        parentnode->rightchild = searchnode->leftchild;
+                        searchnode->leftchild = NULL;
+                        delete searchnode;
+                    }
+                    else if (searchnode->data < parentnode->data)
+                    {
+                        parentnode->leftchild = searchnode->leftchild;
+                        searchnode->leftchild = NULL;
+                        delete searchnode;
+                    }
+                    return root;
+                }
             }
-            else if (target < root->data)
-            {
-                Search(root->leftchild, target);
-            }
-            else if (target > root->data)
-            {
-                Search(root->rightchild, target);
-            }
+            else
+                cout << "element not found" << endl;
         }
-        return currentnode;
+        return root;
+    }
+    node *Search(node *root, int target)
+    {
+
+        if (root == NULL || root->data == target)
+            return root;
+        else if (root->data > target)
+            return Search(root->leftchild, target);
+
+        return Search(root->rightchild, target);
     }
     node *findMax(node *root)
     {
@@ -75,29 +158,60 @@ public:
 int main()
 {
     Bst tree;
-    int ele;
+    int ele, choice, n;
+    // bool result;
     node *res;
     node *root = NULL;
-    int n, dat;
-    cout << "Enter the number of nodes or elements to be inserted: " << endl;
-    cin >> n;
-    while (n)
+    do
     {
-        cin >> dat;
-        root = tree.addNode(root, dat);
-        n--;
-    }
-    cout << "Enter the element to be searched:" << endl;
-    cin >> ele;
-    res = tree.Search(root, ele);
-    if (res)
-        cout << res->data << " Found" << endl;
-    else
-        cout << "Not found" << endl;
-    cout << "Maximum element in the tree:" << endl;
-    res = tree.findMax(root);
-    cout << res->data << endl;
-    cout << "Minimum element in the tree:" << endl;
-    res = tree.findMin(root);
-    cout << res->data << endl;
+        cout << "1.Insert element" << endl;
+        cout << "2.Search element" << endl;
+        cout << "3.Delete element" << endl;
+        cout << "4.Find maximum element" << endl;
+        cout << "5.Find minimum element" << endl;
+
+        cout << "Enter your choice :" << endl;
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            cout << "Enter the number of elements to be inserted:" << endl;
+            cin >> n;
+            cout << "Enter the elements:" << endl;
+            while (n--)
+            {
+                cin >> ele;
+                root = tree.addNode(root, ele);
+            }
+            cout << root->data << endl;
+            break;
+        case 2:
+            cout << "Enter the element to be searched:" << endl;
+            cin >> n;
+            res = tree.Search(root, n);
+            if (res)
+                cout << "Found!: " << n << endl;
+            else
+                cout << "Not found" << endl;
+            break;
+        case 3:
+            cout << "Enter the element to be deleted:" << endl;
+            cin >> n;
+            res = tree.Delete(root, n);
+            if (res)
+                cout << "Deleted: " << n << "Successfully" << endl;
+            else
+                cout << "Element not found" << endl;
+            break;
+
+        case 4:
+            res = tree.findMax(root);
+            cout << "Maximum element in the tree:" << res->data << endl;
+            break;
+        case 5:
+            res = tree.findMin(root);
+            cout << "Minimum element in the tree" << res->data << endl;
+            break;
+        }
+    } while (choice != 0);
 }
