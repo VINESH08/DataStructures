@@ -122,6 +122,13 @@ public:
                     }
                     return root;
                 }
+                else
+                {
+                    node *replace = findMax(searchnode->leftchild);
+                    int temp = replace->data;
+                    Delete(root, temp);
+                    searchnode->data = replace->data;
+                }
             }
             else
                 cout << "element not found" << endl;
@@ -140,18 +147,31 @@ public:
     }
     node *findMax(node *root)
     {
-        max = root;
+        if (root == NULL)
+        {
+            cout << "Tree is empty" << endl;
+        }
+        else
+        {
+            max = root;
 
-        if (max->rightchild != NULL)
-            max = findMax(max->rightchild);
-
+            if (max->rightchild != NULL)
+                max = findMax(max->rightchild);
+        }
         return max;
     }
     node *findMin(node *root)
     {
-        min = root;
-        if (min->leftchild != NULL)
-            min = findMin(min->leftchild);
+        if (root == NULL)
+        {
+            cout << "Tree is empty" << endl;
+        }
+        else
+        {
+            min = root;
+            if (min->leftchild != NULL)
+                min = findMin(min->leftchild);
+        }
         return min;
     }
 };
