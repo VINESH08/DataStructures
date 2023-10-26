@@ -93,7 +93,9 @@ int main()
     obj.Insert(2);
     obj.Insert(3);
     obj.Insert(4);
-    obj.Delete(4);
+    obj.Display();
+
+    obj.Delete(7);
     if (obj.Search(6))
         cout << "Found" << endl;
     else
