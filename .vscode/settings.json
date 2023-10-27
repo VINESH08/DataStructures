@@ -2,7 +2,8 @@
   "files.associations": {
     "ostream": "cpp",
     "iostream": "cpp",
-    "__node_handle": "cpp"
+    "__node_handle": "cpp",
+    "ios": "cpp"
   },
   "C_Cpp.errorSquiggles": "enabled"
 }
