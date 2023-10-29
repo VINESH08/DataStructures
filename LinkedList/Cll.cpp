@@ -63,8 +63,8 @@ public:
                 ppre->next = newnode;
                 if (ploc == Cdllhead->front)
                     Cdllhead->rear = newnode;
-                else
-                    ploc->back = newnode;
+
+                ploc->back = newnode;
             }
             (Cdllhead->count)++;
         }

@@ -5,7 +5,7 @@ class node
 {
 public:
     int data;
-    node *link; //link is a self referential pointer..
+    node *link; // link is a self referential pointer..
     node(int val)
     {
         data = val;
@@ -14,7 +14,7 @@ public:
 };
 void insertAtTail(node *&head, int val)
 {
-    node *temp = new node(val); //new pointer creates memory for the node class data types
+    node *temp = new node(val); // new pointer creates memory for the node class data types
     if (head == NULL)
     {
         head = temp;
