@@ -35,7 +35,7 @@ public:
         }
         return false;
     }
-    void push(char val)
+    void push(int val)
     {
         node *newnode = new node();
         newnode->data = val;

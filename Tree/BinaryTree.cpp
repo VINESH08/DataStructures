@@ -6,6 +6,11 @@ struct node
     node *leftchild;
     node *rightchild;
 };
+struct Queuenode
+{
+    node *treenode;
+    Queuenode *next;
+};
 class BinaryTree
 {
 public:
@@ -13,7 +18,58 @@ public:
     char left, right;
     node *newnode;
     node *root;
-
+    Queuenode *front, *rear = NULL;
+    void enqueue(node *tnode)
+    {
+        Queuenode *newnode = new Queuenode();
+        newnode->treenode = tnode;
+        newnode->next = NULL;
+        if (rear == NULL)
+        {
+            front = rear = newnode;
+            return;
+        }
+        rear->next = newnode;
+        rear = newnode;
+    }
+    node *dequeue()
+    {
+        if (front == nullptr)
+        {
+            return NULL;
+        }
+        Queuenode *temp = front;
+        node *result = front->treenode;
+        front = front->next;
+        if (front == nullptr)
+            rear = nullptr;
+        delete temp;
+        return result;
+    }
+    void BFS()
+    {
+        BFS(root);
+    }
+    void BFS(node *root)
+    {
+        node *currentnode = root;
+        while (currentnode != NULL)
+        {
+            cout << currentnode->data << " ";
+            if (currentnode->leftchild != NULL)
+            {
+                enqueue(currentnode->leftchild);
+            }
+            if (currentnode->rightchild != NULL)
+            {
+                enqueue(currentnode->rightchild);
+            }
+            if (front != NULL)
+                currentnode = dequeue();
+            else
+                currentnode = NULL;
+        }
+    }
     void insert()
     {
         cout << "Enter the root node:" << endl;
@@ -62,5 +118,6 @@ int main()
 {
     BinaryTree obj;
     obj.insert();
-    obj.displayP();
+    // obj.displayP();
+    obj.BFS();
 }
