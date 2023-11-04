@@ -1,10 +1,12 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 struct node
 {
     int data;
     node *leftchild;
     node *rightchild;
+    int height;
 };
 class Bst
 {
@@ -12,6 +14,12 @@ public:
     node *parentnode;
     node *newnode;
     node *max, *min;
+    int Height(node *Node)
+    {
+        if (Node == NULL)
+            return -1;
+        return Node->height;
+    }
     node *create(int data)
     {
         newnode = new node();
@@ -34,7 +42,15 @@ public:
         {
             root->rightchild = addNode(root->rightchild, val);
         }
+        root->height = std::max(Height(root->leftchild), Height(root->rightchild)) + 1;
+        cout << "height of: " << root->data << " is" << root->height << endl;
         return root;
+    }
+    bool balanced(node *Node)
+    {
+        if (Node == NULL)
+            return true;
+        return std::abs(Height(Node->leftchild) - Height(Node->rightchild)) && balanced(Node->leftchild) && balanced(Node->rightchild);
     }
     void parentnodef(node *root, int target)
     {
@@ -189,6 +205,7 @@ int main()
         cout << "3.Delete element" << endl;
         cout << "4.Find maximum element" << endl;
         cout << "5.Find minimum element" << endl;
+        cout << "6.Check for Balanced Bst" << endl;
 
         cout << "Enter your choice :" << endl;
         cin >> choice;
@@ -203,7 +220,7 @@ int main()
                 cin >> ele;
                 root = tree.addNode(root, ele);
             }
-            cout << root->data << endl;
+            // cout << root->data << endl;
             break;
         case 2:
             cout << "Enter the element to be searched:" << endl;
@@ -232,6 +249,12 @@ int main()
             res = tree.findMin(root);
             cout << "Minimum element in the tree" << res->data << endl;
             break;
+        case 6:
+            bool result = tree.balanced(root);
+            if (result)
+                cout << "The Bst is Balanced" << endl;
+            else
+                cout << "The Bst is not Balanced" << endl;
         }
     } while (choice != 0);
 }
