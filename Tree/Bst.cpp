@@ -220,7 +220,7 @@ int main()
                 cin >> ele;
                 root = tree.addNode(root, ele);
             }
-            // cout << root->data << endl;
+            cout << root->height << endl;
             break;
         case 2:
             cout << "Enter the element to be searched:" << endl;
