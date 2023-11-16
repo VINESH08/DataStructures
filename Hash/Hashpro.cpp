@@ -17,7 +17,7 @@ public:
     Listhead **hasharr; // array of pointers
     HashPro(int n)
     {
-        hasharr = new Listhead *[n];
+        hasharr = new Listhead *[n]; // dynamic memory allocation
         for (int i = 0; i < n; i++)
         {
             hasharr[i] = new Listhead;
