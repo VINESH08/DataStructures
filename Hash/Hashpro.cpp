@@ -20,7 +20,7 @@ public:
         hasharr = new Listhead *[n]; // dynamic memory allocation
         for (int i = 0; i < n; i++)
         {
-            hasharr[i] = new Listhead;
+            hasharr[i] = new Listhead();
             hasharr[i]->count = 0;
             hasharr[i]->head = NULL;
         }

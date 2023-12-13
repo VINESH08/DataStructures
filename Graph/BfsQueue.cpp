@@ -23,7 +23,8 @@ class graph
 {
     gv *first;
     int count, qcount;
-    node *front, *rear = NULL;
+    node *front;
+    node *rear;
 
 public:
     graph()
@@ -31,6 +32,8 @@ public:
         first = NULL;
         count = 0;
         qcount = 0;
+        front = NULL;
+        rear = NULL;
     }
     void insertvertex(char data)
     {
@@ -92,8 +95,9 @@ public:
             ga *ya = ytemp->firstarc;
             while (ya->nextarc != NULL)
                 ya = ya->nextarc;
-            ya->nextarc = xarc;
+            ya->nextarc = yarc;
         }
+        return true;
     }
     void enqueue(gv *v)
     {

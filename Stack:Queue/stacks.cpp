@@ -44,14 +44,14 @@ public:
         if (isempty())
         {
             cout << "stack is empty!" << endl;
-            //return false;
+            // return false;
         }
         else
         {
             int dataout = stack[top];
             top--;
             cout << dataout << endl;
-            //return true;
+            // return true;
         }
     }
     void stacktop()
@@ -65,7 +65,7 @@ public:
         {
             int dataout = stack[top];
             cout << "element at top is:" << dataout << endl;
-            //return true;
+            // return true;
         }
     }
 };

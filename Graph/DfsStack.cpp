@@ -23,13 +23,14 @@ class graph
 {
     gv *first;
     int count;
-    node *top = NULL;
+    node *top;
 
 public:
     graph()
     {
         first = NULL;
         count = 0;
+        top = NULL;
     }
     void insertvertex(char data)
     {
@@ -81,18 +82,21 @@ public:
             xa->nextarc = xarc;
         }
         // for ytemp
+        /*
         ga *yarc = new ga();
-        yarc->content = xtemp;
-        yarc->nextarc = NULL;
-        if (ytemp->firstarc == NULL)
-            ytemp->firstarc = yarc;
-        else
-        {
-            ga *ya = ytemp->firstarc;
-            while (ya->nextarc != NULL)
-                ya = ya->nextarc;
-            ya->nextarc = xarc;
-        }
+         yarc->content = xtemp;
+         yarc->nextarc = NULL;
+         if (ytemp->firstarc == NULL)
+             ytemp->firstarc = yarc;
+         else
+         {
+             ga *ya = ytemp->firstarc;
+             while (ya->nextarc != NULL)
+                 ya = ya->nextarc;
+             ya->nextarc = xarc;
+         }
+        */
+        return true;
     }
     void push(gv *v)
     {
