@@ -2,20 +2,22 @@
 using namespace std;
 int maxsub(int arr[], int size)
 {
-    int max_so_far = INT_MIN, max_ending_here = 0;
-    for (int i = 0; i < size; i++)
+    int maxsum = arr[0];
+    int sum = arr[0];
+    for (int i = 1; i < size; i++)
     {
-        max_ending_here += arr[i];
-        if (max_so_far < max_ending_here)
+        if (sum >= 0)
         {
-            max_so_far = max_ending_here;
+            sum = sum + arr[i];
         }
-        if (max_ending_here < 0)
+        else
         {
-            max_ending_here = 0;
+            sum = arr[i];
         }
+        if (sum > maxsum)
+            maxsum = sum;
     }
-    return max_so_far;
+    return maxsum;
 }
 int main()
 {
