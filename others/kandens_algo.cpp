@@ -31,5 +31,4 @@ int main()
     }
     int max = maxsub(arr, n);
     cout << max << endl;
-    ;
 }
