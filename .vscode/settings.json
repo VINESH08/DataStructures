@@ -9,7 +9,8 @@
     "string": "cpp",
     "iosfwd": "cpp",
     "iterator": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "filesystem": "cpp"
   },
   "C_Cpp.errorSquiggles": "enabled"
 }
