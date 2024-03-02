@@ -37,7 +37,9 @@ public:
     void input()
     {
 
-        ifstream inf;
+        ifstream inf; // srand((long int)clock())
+                      // for(i=0;i<size;i++)
+                      // arr[i]=rand()%30000
         inf.open("output.txt");
         // ascending order
         srand((long int)clock());

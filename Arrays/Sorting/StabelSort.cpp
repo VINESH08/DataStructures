@@ -5,10 +5,9 @@ using namespace std;
 class Data
 {
 private:
+public:
     string city;
     string state;
-
-public:
     Data(string city, string state)
     {
         this->city = city;
@@ -42,10 +41,10 @@ public:
         for (int i = 1; i <= n - 1; i++)
         {
             Data *curr = ob[i];
-            string city = ob[i]->getcity();
-            string key = ob[i]->getstate();
+            string City = ob[i]->getcity();
+            string State = ob[i]->getstate();
             int j = i - 1;
-            while (j >= 0 && ob[j]->getstate().compare(key) == 0 && ob[j]->getcity() > city)
+            while (j >= 0 && ob[j]->getstate().compare(State) == 0 && ob[j]->getcity().compare(City) > 0)
             {
 
                 ob[j + 1] = ob[j];
