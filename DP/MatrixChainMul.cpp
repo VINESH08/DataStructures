@@ -20,18 +20,6 @@ public:
         for (int i = 0; i < srow; i++)
             s[i] = new int[scol];
     }
-
-    ~MCM()
-    {
-        for (int i = 0; i < mrow; i++)
-            delete[] m[i];
-        delete[] m;
-
-        for (int i = 0; i < srow; i++)
-            delete[] s[i];
-        delete[] s;
-    }
-
     void matrix_chain_order(int p[], int n)
     {
         for (int i = 0; i < n; i++)
