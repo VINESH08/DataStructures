@@ -1,18 +1,18 @@
 #include <iostream>
-#include <fstream>
-#include <stdlib.h>
-#include <time.h>
-#include <cstring>
-#include <string>
+#include <climits>
 using namespace std;
-int **s;
+
 class MCM
 {
-public:
+private:
     int **m;
+    int **s;
+    int mrow, mcol, srow, scol;
 
-    MCM(int mrow, int mcol, int srow, int scol)
+public:
+    MCM(int size)
     {
+        mrow = mcol = srow = scol = size;
         m = new int *[mrow];
         for (int i = 0; i < mrow; i++)
             m[i] = new int[mcol];
@@ -20,6 +20,18 @@ public:
         for (int i = 0; i < srow; i++)
             s[i] = new int[scol];
     }
+
+    ~MCM()
+    {
+        for (int i = 0; i < mrow; i++)
+            delete[] m[i];
+        delete[] m;
+
+        for (int i = 0; i < srow; i++)
+            delete[] s[i];
+        delete[] s;
+    }
+
     void matrix_chain_order(int p[], int n)
     {
         for (int i = 0; i < n; i++)
@@ -30,9 +42,9 @@ public:
             {
                 int j = i + l - 1;
                 m[i][j] = INT_MAX;
-                for (int k = i; k <= j - 1; k++)
+                for (int k = i; k < j; k++)
                 {
-                    int q = m[i][k] + m[k + 1][j] + (p[i - 1] * p[k] * p[j]);
+                    int q = m[i][k] + m[k + 1][j] + p[i] * p[k + 1] * p[j + 1];
                     if (q < m[i][j])
                     {
                         m[i][j] = q;
@@ -42,33 +54,40 @@ public:
             }
         }
     }
-    void print(int i, int j)
+
+    void print_optimal_parens(int i, int j)
     {
         if (i == j)
             cout << "A" << i + 1;
         else
         {
             cout << "(";
-            print(i, s[i][j]);
-            print(s[i][j] + 1, j);
+            print_optimal_parens(i, s[i][j]);
+            print_optimal_parens(s[i][j] + 1, j);
             cout << ")";
         }
     }
 };
+
 int main()
 {
-    int n, m;
-    cout << "Enter the number of matrices" << endl;
+    int n;
+    cout << "Enter the number of matrices: ";
     cin >> n;
-    cout << "Enter the array size" << endl;
-    cin >> m;
-    int arr[m];
-    cout << "Enter the array elements" << endl;
-    for (int i = 0; i < m; i++)
+
+    int arrSize = n + 1;
+    int arr[arrSize];
+    cout << "Enter " << arrSize << " dimensions for the matrices:" << endl;
+    for (int i = 0; i < arrSize; i++)
     {
-        cin >> arr[m];
+        cin >> arr[i];
     }
-    MCM obj(n, n, n, n);
+
+    MCM obj(n);
     obj.matrix_chain_order(arr, n);
-    obj.print(0, n - 1);
+    cout << "Optimal parenthesization is: ";
+    obj.print_optimal_parens(0, n - 1);
+    cout << endl;
+
+    return 0;
 }
