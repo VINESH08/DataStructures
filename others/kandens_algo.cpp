@@ -2,6 +2,7 @@
 using namespace std;
 int maxsub(int arr[], int size)
 {
+    int start = 0;
     int maxsum = arr[0];
     int sum = arr[0];
     for (int i = 1; i < size; i++)
@@ -15,7 +16,9 @@ int maxsub(int arr[], int size)
             sum = arr[i];
         }
         if (sum > maxsum)
+        {
             maxsum = sum;
+                }
     }
     return maxsum;
 }
