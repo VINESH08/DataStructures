@@ -10,7 +10,8 @@
     "iosfwd": "cpp",
     "iterator": "cpp",
     "vector": "cpp",
-    "filesystem": "cpp"
+    "filesystem": "cpp",
+    "new": "cpp"
   },
   "C_Cpp.errorSquiggles": "enabled"
 }
