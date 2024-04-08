@@ -65,6 +65,22 @@ public:
                 cin >> w[i][j];
             }
         }
+        // indegree->column, outdegree->row now for vertex 5:
+        int incount = 0;
+        int outcount = 0;
+        for (int i = 0; i < 5; i++)
+        {
+            // indegree
+            if (w[i][4] != 0 && w[i][4] != 999)
+                incount++;
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            if (w[4][i] != 0 && w[4][i] != 999)
+                outcount++;
+        }
+        cout << "Indegree:" << incount << endl;
+        cout << "Outdegree:" << outcount << endl;
     }
     void output(int size)
     {
