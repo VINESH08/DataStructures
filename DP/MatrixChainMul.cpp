@@ -20,7 +20,7 @@ public:
         for (int i = 0; i < srow; i++)
             s[i] = new int[scol];
     }
-    void matrix_chain_order(int p[], int n)
+    int matrix_chain_order(int p[], int n)
     {
         for (int i = 0; i < n; i++)
             m[i][i] = 0;
@@ -41,6 +41,7 @@ public:
                 }
             }
         }
+        return m[0][n - 1];
     }
 
     void print_optimal_parens(int i, int j)
@@ -72,7 +73,7 @@ int main()
     }
 
     MCM obj(n);
-    obj.matrix_chain_order(arr, n);
+    cout << "minimum multiplications" << obj.matrix_chain_order(arr, n) << endl;
     cout << "Optimal parenthesization is: ";
     obj.print_optimal_parens(0, n - 1);
     cout << endl;

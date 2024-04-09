@@ -21,7 +21,7 @@ public:
 int main()
 {
 
-    int p[] = {10, 100, 9, 50};
+    int p[] = {4, 10, 3, 12, 20, 7};
     int n = sizeof(p) / sizeof(p[0]) - 1;
 
     MCMDC mcmdc;
