@@ -65,22 +65,33 @@ public:
             print(x, y, i, j - 1);
         else
             print(x, y, i - 1, j);
+        // cout << endl;
     }
 };
 int main()
 {
 
     string s1, s2;
+    int size;
     // cout << "Enter the number of rows" << endl;
     // cin >> n;
     // cout << "Enter the number of columns" << endl;
     // cin >> m;
     cout << "Enter the String one" << endl;
     cin >> s1;
-    cout << "Enter the String two" << endl;
-    cin >> s2;
+    // cout << "Enter the String two" << endl;
+    // cin >> s2;
     // cout << s1.length();
-    LCS obj(s1.length() + 1, s2.length() + 1);
-    obj.lcsBu(s1, s2);
-    obj.print(s1, s2, s1.length(), s2.length());
+    cout << "Enter the size of array" << endl;
+    cin >> size;
+    string s[size];
+    for (int i = 0; i < size; i++)
+        cin >> s[i];
+    for (int i = 0; i < size; i++)
+    {
+        LCS obj(s1.length() + 1, s[i].length() + 1);
+        obj.lcsBu(s1, s[i]);
+        obj.print(s1, s[i], s1.length(), s[i].length());
+        cout << endl;
+    }
 }

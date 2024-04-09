@@ -44,7 +44,7 @@ int main()
     cin >> rodsize;
     int parr[rodsize + 1];
     parr[0] = 0;
-    cout << "Enter the cost matrix:" << endl;
+    cout << "Enter the cost array:" << endl;
     for (int i = 1; i <= rodsize; i++)
     {
         cout << "Cost for length " << i << ":";
