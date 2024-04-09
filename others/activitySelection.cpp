@@ -41,6 +41,7 @@ public:
         for (int i = 1; i < n; i++)
         {
             int key = arr[i].end;
+            int key1 = arr[i].start;
             int j = i - 1;
             while (j >= 0 && arr[j].end > key)
             {
@@ -48,6 +49,7 @@ public:
                 j--;
             }
             arr[j + 1].end = key;
+            arr[j + 1].start = key1;
         }
     }
     void greedyselection()
