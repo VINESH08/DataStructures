@@ -54,33 +54,56 @@ public:
             }
         }
     }
-    void input(int size)
+    void input(int vsize)
     {
-
-        for (int i = 0; i < size; i++)
+        int inarr[vsize];
+        int outarr[vsize];
+        int incount = 0;
+        int outcount = 0;
+        for (int i = 0; i < vsize; i++)
         {
-            for (int j = 0; j < size; j++)
+            for (int j = 0; j < vsize; j++)
             {
                 cout << "Enter element:" << i + 1 << "," << j + 1 << "Element" << endl;
                 cin >> w[i][j];
             }
         }
-        // indegree->column, outdegree->row now for vertex 5:
-        int incount = 0;
-        int outcount = 0;
-        for (int i = 0; i < 5; i++)
+        // indegree->column, outdegree->row now for verte:
+        // indegree
+        for (int i = 0; i < vsize; i++)
         {
-            // indegree
-            if (w[i][4] != 0 && w[i][4] != 999)
-                incount++;
+            for (int j = 0; j < vsize; j++)
+            {
+                if (w[j][i] != 0 && w[j][i] != 999)
+                {
+                    incount++;
+                }
+            }
+            inarr[i] = incount;
+            incount = 0;
         }
-        for (int i = 0; i < 5; i++)
+        // indegree
+        for (int i = 0; i < vsize; i++)
         {
-            if (w[4][i] != 0 && w[4][i] != 999)
-                outcount++;
+            for (int j = 0; j < vsize; j++)
+            {
+                if (w[i][j] != 0 && w[i][j] != 999)
+                {
+                    outcount++;
+                }
+            }
+            outarr[i] = outcount;
+            outcount = 0;
         }
-        cout << "Indegree:" << incount << endl;
-        cout << "Outdegree:" << outcount << endl;
+        cout << "indegree" << endl;
+        for (int i = 0; i < vsize; i++)
+        {
+            cout << inarr[i] << ' ';
+        }
+        for (int i = 0; i < vsize; i++)
+        {
+            cout << outarr[i] << ' ';
+        }
     }
     void output(int size)
     {
@@ -108,11 +131,14 @@ public:
 int main()
 {
     int size;
+    int vsize;
     cout << "Enter the number of edges" << endl;
     cin >> size;
-    FloydWarshall obj(size);
-    obj.input(size);
-    obj.intialize(size);
-    obj.floydwarshall(size);
-    obj.output(size);
+    cout << "Enter the number of vertices:" << endl;
+    cin >> vsize;
+    FloydWarshall obj(vsize);
+    obj.input(vsize);
+    obj.intialize(vsize);
+    obj.floydwarshall(vsize);
+    obj.output(vsize);
 }

@@ -78,7 +78,7 @@ public:
 	{
 		INITIALIZE_SINGLE_SOURCE(s);
 
-		for (int i = 1; i < m; i++)
+		for (int i = 1; i < n; i++)
 		{
 			node *t = elist;
 			while (t != NULL)
@@ -93,6 +93,7 @@ public:
 		{
 			if (vertex[t->to].d > vertex[t->from].d + t->weight)
 				return false;
+			t = t->next;
 		}
 		return true;
 	}
