@@ -46,19 +46,8 @@ public:
         {
             if (t0 == p)
             {
-                int flag = 0;
-                for (int j = 0; j < pattern.length(); j++)
-                {
-                    if (pattern[j] != text[i + j])
-                    {
-                        flag = 1;
-                        break;
-                    }
-                }
-                if (flag == 0)
-                {
-                    cout << "pattern occurs at valid shift: " << i << endl;
-                }
+
+                cout << "pattern occurs at valid shift: " << i << endl;
             }
             if (i < text.length() - pattern.length())
             {
