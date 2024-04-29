@@ -1,13 +1,13 @@
 #include <iostream>
 #include <string>
-
 using namespace std;
 class Data
 {
 private:
-public:
     string city;
     string state;
+
+public:
     Data(string city, string state)
     {
         this->city = city;
@@ -21,60 +21,83 @@ public:
     {
         return state;
     }
-    static void bubblesort(Data **&ob, int n) // sorting only states(using bubble sort)
+    static void heapsort(Data **&ob, int n)
     {
-        for (int i = 0; i < n - 1; i++)
+        for (int i = (n / 2) - 1; i >= 0; i--)
         {
-            for (int j = 0; j < n - i - 1; j++)
-            {
-                if (ob[j]->getstate().compare(ob[j + 1]->getstate()) > 0)
-                {
-                    Data *temp = ob[j];
-                    ob[j] = ob[j + 1];
-                    ob[j + 1] = temp;
-                }
-            }
+            heapify(ob, i, n);
+        }
+        for (int i = n - 1; i >= 1; i--)
+        {
+            swap(ob[0], ob[i]);
+            n--;
+            heapify(ob, 0, n);
         }
     }
-    static void insertionsort(Data **&ob, int n)
+    static void heapify(Data **&ob, int i, int n) // sort only states
     {
-        for (int i = 1; i <= n - 1; i++)
+        int largest = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        if (left <= n && ob[left]->getstate().compare(ob[largest]->getstate()) > 0)
         {
-            Data *curr = ob[i];
-            string City = ob[i]->getcity();
-            string State = ob[i]->getstate();
-            int j = i - 1;
-            while (j >= 0 && ob[j]->getstate().compare(State) == 0 && ob[j]->getcity().compare(City) > 0)
-            {
-
-                ob[j + 1] = ob[j];
-
-                j--;
-            }
-            ob[j + 1] = curr;
+            largest = left;
         }
+        if (right <= n && ob[right]->getstate().compare(ob[largest]->getstate()) > 0)
+        {
+            largest = right;
+        }
+        if (largest != i)
+        {
+            swap(ob[i], ob[largest]);
+            heapify(ob, largest, n);
+        }
+    }
+    static void quicksort(Data **&ob, int p, int r)
+    {
+        if (p < r)
+        {
+            int k = partation(ob, p, r);
+            quicksort(ob, p, k - 1);
+            quicksort(ob, k + 1, r);
+        }
+    }
+    static int partation(Data **&ob, int p, int q)
+    {
+        Data *pivot = ob[q];
+        int i = p - 1;
+        for (int j = p; j <= q - 1; j++)
+        {
+            if (ob[j]->getstate() == pivot->getstate() && ob[j]->getcity() < pivot->getcity())
+            {
+                i++;
+                swap(ob[i], ob[j]);
+            }
+        }
+        swap(ob[i + 1], ob[q]);
+        return i + 1;
     }
 };
 int main()
 {
+    string cit;
+    string stat;
     int n;
-    cout << "Enter the number of inputs" << endl;
+    cout << "Enter the size" << endl;
     cin >> n;
-
-    Data **obj = new Data *[n]; // array of pointers
-    string city, state;
+    Data **ob = new Data *[n];
     for (int i = 0; i < n; i++)
     {
-        cout << "Enter the " << i + 1 << " City:" << endl;
-        cin >> city;
-        cout << "Enter the " << i + 1 << " State:" << endl;
-        cin >> state;
-        obj[i] = new Data(city, state);
+        cout << "Enter city" << endl;
+        cin >> cit;
+        cout << "Enter the state" << endl;
+        cin >> stat;
+        ob[i] = new Data(cit, stat);
     }
-    Data::bubblesort(obj, n);
-    Data::insertionsort(obj, n);
+    Data::heapsort(ob, n);
+    Data::quicksort(ob, 0, n - 1);
     for (int i = 0; i < n; i++)
     {
-        cout << "City:" << obj[i]->getcity() << " State:" << obj[i]->getstate() << endl;
+        cout << "City:" << ob[i]->getcity() << " State:" << ob[i]->getstate() << endl;
     }
 }

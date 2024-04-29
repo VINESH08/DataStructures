@@ -42,7 +42,7 @@ public:
                       // arr[i]=rand()%30000
         inf.open("output.txt");
         // ascending order
-        srand((long int)clock());
+        srand((long int)clock()); // srand((long int)clock());
         for (int i = 0; i < size; i++)
             // arr[i] = rand() % 30000;->random
             inf >> arr[i]; // ascending

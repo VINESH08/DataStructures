@@ -1,5 +1,8 @@
 #include <iostream>
 #include <limits.h>
+#include <stdlib.h>
+#include <time.h>
+#include <fstream>
 using namespace std;
 void mergeSort(int arr[], int p, int r);
 void merge(int arr[], int p, int q, int r);
@@ -12,12 +15,13 @@ int main()
     cout << "Enter the array elements" << endl;
     for (int i = 0; i < n; i++)
     {
-        cin >> arr[i];
+        arr[i] = rand() % n;
     }
     mergeSort(arr, 0, n - 1);
+
     for (int i = 0; i < n; i++)
     {
-        cout << arr[i] << " ";
+        cout << arr[i] << ' ';
     }
 }
 void mergeSort(int arr[], int p, int r)

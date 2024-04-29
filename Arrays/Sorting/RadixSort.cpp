@@ -7,16 +7,14 @@ class RadixSort
 {
 private:
     int *A;
-    int *B;
+
     int size;
-    int maxNum = INT_MIN;
 
 public:
     RadixSort(int n)
     {
         size = n;
         A = new int[size];
-        B = new int[size]; // Temporary array for sorting
     }
     void input()
     {
@@ -24,7 +22,6 @@ public:
         for (int i = 0; i < size; i++)
         {
             cin >> A[i];
-            maxNum = max(maxNum, A[i]); // Find the maximum number to know the number of digits
         }
     }
 
