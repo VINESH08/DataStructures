@@ -41,7 +41,7 @@ public:
             arr[i][j] = 0;
             return arr[i][j];
         }
-        if (x[i] == y[j])
+        if (x[i - 1] == y[j - 1])
         {
             arr[i][j] = 1 + lcstd(x, y, i - 1, j - 1);
         }
@@ -77,5 +77,5 @@ int main()
     cin >> s2;
     // cout << s1.length();
     LCSTD obj(s1.length() + 1, s2.length() + 1);
-    cout << obj.lcstd(s1, s2, s1.length() - 1, s2.length() - 1) << endl;
+    cout << obj.lcstd(s1, s2, s1.length(), s2.length()) << endl;
 }

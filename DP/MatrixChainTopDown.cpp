@@ -57,8 +57,10 @@ public:
         else
         {
             cout << "(";
+
             printsol(i, s[i][j]);
             printsol(s[i][j] + 1, j);
+
             cout << ")";
         }
     }
