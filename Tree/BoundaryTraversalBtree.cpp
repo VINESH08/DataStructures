@@ -1,6 +1,7 @@
 #include <iostream>
-#include <vector>
+#include <algorithm>
 #include <queue>
+#include <vector>
 using namespace std;
 struct TreeNode
 {

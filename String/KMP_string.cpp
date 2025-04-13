@@ -62,5 +62,5 @@ int main()
 {
     KMP obj;
     obj.prefixFunction("ababd");
-    obj.stringMatcher("ababd", "ababd");
+    obj.stringMatcher("zababd", "ababd");
 }

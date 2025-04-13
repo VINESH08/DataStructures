@@ -2,13 +2,13 @@
 #include <vector>
 #include <queue>
 using namespace std;
+
 class BFS
 {
 public:
-    vector<int> BFStraversal(int n, vector<int> adj[])
+    vector<int> BFStraversal(int n, vector<int> adj[], int start)
     {
         vector<int> vis(n + 1, 0);
-        int start = 6;
         vis[start] = 1;
         queue<int> q;
         q.push(start);
@@ -30,26 +30,35 @@ public:
         return res;
     }
 };
+
 int main()
 {
     BFS g;
     int n, m;
-    int u, v;
-    cout << "Enter the number of nodes" << endl;
+    int u, v, start;
+    cout << "Enter the number of nodes: ";
     cin >> n;
-    cout << "Enter the number of edges" << endl;
+    cout << "Enter the number of edges: ";
     cin >> m;
     vector<int> adj[n + 1];
-    cout << "Enter the edges" << endl;
+    cout << "Enter the edges: " << endl;
     for (int i = 0; i < m; i++)
     {
         cin >> u >> v;
+        if (u < 1 || u > n || v < 1 || v > n)
+        {
+            cout << "Invalid edge!" << endl;
+            return 1;
+        }
         adj[u].push_back(v);
-        adj[v].push_back(u);
+        adj[v].push_back(u); // Remove this line if directed graph is needed.
     }
-    vector<int> result = g.BFStraversal(n, adj);
+    cout << "Enter the starting node: ";
+    cin >> start;
+    vector<int> result = g.BFStraversal(n, adj, start);
     for (auto it : result)
     {
         cout << it << " ";
     }
+    cout << endl;
 }

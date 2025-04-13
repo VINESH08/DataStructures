@@ -11,7 +11,8 @@
     "iterator": "cpp",
     "vector": "cpp",
     "filesystem": "cpp",
-    "new": "cpp"
+    "new": "cpp",
+    "__config": "cpp"
   },
   "C_Cpp.errorSquiggles": "enabled"
 }
